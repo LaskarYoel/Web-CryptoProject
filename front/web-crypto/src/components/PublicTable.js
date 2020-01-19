@@ -11,17 +11,23 @@ class PublicTable extends React.Component {
           title="All Crypto Currencies"
           columns={[
             { title: 'Name', field: 'name' },
-            { title: 'Surname', field: 'surname' },
-            { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-            {
-              title: 'Birth Place',
-              field: 'birthCity',
-              lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-            },
+            { title: 'Market Cap', field: 'markerCap' },
+            { title: 'Price', field: 'price' },
+            { title: 'Change', field: 'change' },
+            
           ]}
           data={[
-            { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-            { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
+            { name: 'Bitcoin', markerCap: '$157 359 442 197', price: '8660.49 $', change: '-0,89 %' },
+            { name: 'Ethereum', markerCap: '$18 481 348', price: '165.48 $', change: '-5,18 %' },
+            { name: 'Bitcoin', markerCap: '$157 359 442 197', price: '8660.49 $', change: '-0,89 %' },
+            { name: 'Ethereum', markerCap: '$18 481 348', price: '165.48 $', change: '-5,18 %' },
+            { name: 'Bitcoin', markerCap: '$157 359 442 197', price: '8660.49 $', change: '-0,89 %' },
+            { name: 'Ethereum', markerCap: '$18 481 348', price: '165.48 $', change: '-5,18 %' },
+            { name: 'Bitcoin', markerCap: '$157 359 442 197', price: '8660.49 $', change: '-0,89 %' },
+            { name: 'Ethereum', markerCap: '$18 481 348', price: '165.48 $', change: '-5,18 %' },
+            { name: 'Bitcoin', markerCap: '$157 359 442 197', price: '8660.49 $', change: '-0,89 %' },
+            { name: 'Ethereum', markerCap: '$18 481 348', price: '165.48 $', change: '-5,18 %' },
+
           ]}        
           actions={[
             {

@@ -15,8 +15,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import SearchIcon from '@material-ui/icons/Search';
+
 import PublicTable from '../PublicTable'
 
 const drawerWidth = 240;
@@ -141,14 +142,19 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Profil', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+        <ListItem button>
+                <ListItemIcon>
+                    <AccountCircleIcon fontSize='large' />
+                </ListItemIcon>
+                <ListItemText primary="Profil" />
             </ListItem>
-          ))}
+            <ListItem button>
+                <ListItemIcon>
+                    <SearchIcon fontSize='large' />
+                </ListItemIcon>
+                <ListItemText primary="Search" />
+            </ListItem>
         </List>
-        
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
