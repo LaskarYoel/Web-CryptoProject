@@ -1,12 +1,12 @@
-import React, { Component }  from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import NavBar from './components/BaseFront/NavBar';
-import PublicTable from './components/PublicTable'
+import React from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import App from './components/App';
+
+render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'));
 
 
-
-
-//ReactDOM.render(<Login />, document.getElementById('root'));
-//<PublicTable/>
-ReactDOM.render(<NavBar />, document.getElementById('root'));

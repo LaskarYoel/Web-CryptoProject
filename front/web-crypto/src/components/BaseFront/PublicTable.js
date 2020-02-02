@@ -42,3 +42,4 @@ class PublicTable extends React.Component {
   }
   
 export default PublicTable
+

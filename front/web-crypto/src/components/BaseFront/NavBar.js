@@ -16,8 +16,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SearchIcon from '@material-ui/icons/Search';
-import PublicTable from '../PublicTable'
+//import SearchIcon from '@material-ui/icons/Search';
+import PublicTable from './PublicTable'
+import { Link } from 'react-router-dom'
+import HomeIcon from '@material-ui/icons/Home';
+import StarIcon from '@material-ui/icons/Star';
+import Home from '../Home';
+import Connexion from '../Connexion'
+
 
 const drawerWidth = 240;
 
@@ -82,7 +88,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MiniDrawer() {
+
+
+export default function MiniDrawer(props) {
+   
+  
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -95,74 +105,180 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
+  function display() {
+    if (props.display === "public" ) {
+      return (
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open,
             })}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Epitech-Crypto
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-        <ListItem button>
-                <ListItemIcon>
-                    <AccountCircleIcon fontSize='large' />
-                </ListItemIcon>
-                <ListItemText primary="Profil" />
-            </ListItem>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, {
+                  [classes.hide]: open,
+                })}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>
+                Epitech-Crypto
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            className={clsx(classes.drawer, {
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            })}
+            classes={{
+              paper: clsx({
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+              }),
+            }}
+          >
+            <div className={classes.toolbar}>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
             <ListItem button>
-                <ListItemIcon>
-                    <SearchIcon fontSize='large' />
-                </ListItemIcon>
-                <ListItemText primary="Search" />
-            </ListItem>
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <h1>
-            Inside
-        </h1>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
-        <PublicTable/>
-      </main>
-    </div>
-  );
+                      <ListItemIcon>
+                          <HomeIcon fontSize='large' />
+                      </ListItemIcon>
+                      <ListItemText >
+                        <Link to='/'>Home</Link>
+                      </ListItemText>      
+              </ListItem>
+            <ListItem button>
+                      <ListItemIcon component={Home} to="/">
+                          <AccountCircleIcon fontSize='large' />
+                      </ListItemIcon>
+                      <ListItemText >
+                        <Link to='/login'>Login</Link>
+                      </ListItemText>      
+              </ListItem>
+              <ListItem button>
+                      <ListItemIcon>
+                          <StarIcon fontSize='large' />
+                      </ListItemIcon>
+                      <ListItemText >
+                        <Link to='/favorites'>Favorites</Link>
+                      </ListItemText>      
+              </ListItem>
+                
+            </List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <h1>
+                Inside
+            </h1>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+            <PublicTable displayTable={true}/>
+            
+          </main>
+        </div>
+      )
+    }else if (props.display === "profil") {
+      return (
+
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open,
+            })}
+          >
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, {
+                  [classes.hide]: open,
+                })}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>
+                Epitech-Crypto
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            className={clsx(classes.drawer, {
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            })}
+            classes={{
+              paper: clsx({
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+              }),
+            }}
+          >
+            <div className={classes.toolbar}>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+            <ListItem button>
+                      <ListItemIcon>
+                          <HomeIcon fontSize='large' />
+                      </ListItemIcon>
+                      <ListItemText >
+                        <Link to='/'>Home</Link>
+                      </ListItemText>      
+              </ListItem>
+            <ListItem button>
+                      <ListItemIcon component={Home} to="/">
+                          <AccountCircleIcon fontSize='large' />
+                      </ListItemIcon>
+                      <ListItemText >
+                        <Link to='/login'>Login</Link>
+                      </ListItemText>      
+              </ListItem>
+              <ListItem button>
+                      <ListItemIcon>
+                          <StarIcon fontSize='large' />
+                      </ListItemIcon>
+                      <ListItemText >
+                        <Link to='/favorites'>Favorites</Link>
+                      </ListItemText>      
+              </ListItem>
+                
+            </List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <h1>
+                Inside Connexion
+            </h1>
+            <Connexion/>
+          </main>
+        </div>
+      
+      )
+    }
+  }
+
+
+  return display() ;
 }
