@@ -1,10 +1,12 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
-import Login from './UserPage/Login'
-import Favorites from './UserPage/Favorites'
+import Login from '../UserPages/Login'
+import Favorites from '../UserPages/Favorites'
+import MiniDrawer from '../BaseFront/NavBar'
 
 const Router = () => (
+  
   <main>
     <Switch>
       <Route exact path='/' component={Home}/>
