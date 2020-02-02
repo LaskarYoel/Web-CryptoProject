@@ -1,9 +1,9 @@
 import React from 'react'
-import Router from './Router'
+import RouterApp from './RouterApp'
 
 const App = () => (
   <div>
-    <Router/>
+    <RouterApp/>
   </div>
 )
 

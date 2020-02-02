@@ -3,7 +3,7 @@ import MiniDrawer from '../BaseFront/NavBar'
 
 const Home = () => (
   <div>
-    <MiniDrawer display="publicTable" />
+    <MiniDrawer />
   </div>
 )
 
