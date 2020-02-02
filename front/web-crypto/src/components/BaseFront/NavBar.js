@@ -17,17 +17,19 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 //import SearchIcon from '@material-ui/icons/Search';
 import PublicTable from './PublicTable'
 import { Link } from 'react-router-dom'
-import HomeIcon from '@material-ui/icons/Home';
 import StarIcon from '@material-ui/icons/Star';
 import Home from '../BaseApp/Home';
 import Profil from '../UserPages/Profil'
 import Login from '../UserPages/Login'
 import Favorites from '../UserPages/Favorites'
 import history from '../BaseApp/history'
+import {icons} from './icons'
+
+
+
 
 
 const drawerWidth = 240;
@@ -161,7 +163,7 @@ export default function Navbar(props) {
           <ListItem component={Link} to='/' button>
             
             <ListItemIcon>
-              <HomeIcon fontSize='large' />
+              {icons.home}
             </ListItemIcon>
             <ListItemText >
               Home
@@ -171,7 +173,7 @@ export default function Navbar(props) {
           <ListItem component={Link} to='/profil' button>
             
               <ListItemIcon>
-                <HomeIcon fontSize='large' />
+                {icons.account}
               </ListItemIcon>
               <ListItemText >
                 Profil
