@@ -4,6 +4,7 @@ import Favorites from '../UserPages/Favorites'
 import Login from '../UserPages/Login'
 import Home from './Home'
 import history from './history'
+import Navbar from '../BaseFront/NavBar'
 
 class RouterApp extends React.Component {
 
@@ -11,11 +12,8 @@ class RouterApp extends React.Component {
   render() {
     return (
       <Router history={history}>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/favorites' component={Favorites} />
-        </Switch>
+        <Navbar/>
+        
       </Router>
     )
   }
