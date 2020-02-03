@@ -3,7 +3,7 @@ import PublicTable from '../BaseFront/PublicTable'
 
 const Home = () => (
   <div>
-    <PublicTable></PublicTable>
+    <PublicTable/>
   </div>
 )
 

@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
 
 const user = {
   connect: true,
-  admin: false,
+  admin: true,
 }
 
 
@@ -177,57 +177,39 @@ export default function Navbar(props) {
               user.admin ?
                 <>
                   <ListItem component={Link} to='/profil' button>
-
                     <ListItemIcon>
                       {icons.account}
                     </ListItemIcon>
                     <ListItemText >Profil</ListItemText>
-
                   </ListItem>
-
                   <ListItem component={Link} to='/list-users' button>
-
                     <ListItemIcon>
                       {icons.listIcon}
                     </ListItemIcon>
                     <ListItemText >Liste User</ListItemText>
-
                   </ListItem>
                   <ListItem component={Link} to='/list-crypto' button>
-
                     <ListItemIcon>
                       {icons.buildIcon}
                     </ListItemIcon>
                     <ListItemText >Liste Crypto</ListItemText>
-
                   </ListItem>
                 </>
                 :
                 <ListItem component={Link} to='/profil' button>
-
                   <ListItemIcon>
                     {icons.account}
                   </ListItemIcon>
                   <ListItemText >Profil</ListItemText>
-
                 </ListItem>
-
-
               :
-
               <ListItem component={Link} to='/login' button>
-
                 <ListItemIcon>
                   {icons.login}
                 </ListItemIcon>
                 <ListItemText >Login</ListItemText>
-
               </ListItem>
-
             }
-
-
-
 
           </List>
         </Drawer>
@@ -235,33 +217,32 @@ export default function Navbar(props) {
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path='/' component={Home} />
-
             {
-              user.connect ?
+              user.connect ? 
                 <>
-
                   <Route exact path='/profil' component={Profil} />
                   <Route exact path='/favorites' component={Favorites} />
+                    {
+                      user.admin ?
+                        <>
+                          <Route exact path='/list-users' component={ListUsers} />
+                          <Route exact path='/list-crypto' component={ListCrypto} />
+                        </>
+                      :
+                        <>
+                          <Route exact path='/list-users' component={Error404} />
+                          <Route exact path='/list-crypto' component={Error404} />
+                        </>
+                    }
                 </>
-                :
-                <>
+                :<>
+                  <Route exact path='/list-users' component={Error404} />
+                  <Route exact path='/list-crypto' component={Error404} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/register' component={Register} />
                 </>
             }
-            {
-              user.admin ?
-                <>
-                  <Route exact path='/list-users' component={ListUsers} />
-                  <Route exact path='/list-crypto' component={ListCrypto} />
-                </>
-                : 
-                <>
-                  <Route exact path='/list-users' component={Error404} />
-                  <Route exact path='/list-crypto' component={Error404} />
-                </>
-
-            }
+            
 
 
           </Switch>
