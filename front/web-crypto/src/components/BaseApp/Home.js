@@ -1,9 +1,9 @@
 import React from 'react'
-import MiniDrawer from '../BaseFront/NavBar'
+import PublicTable from '../BaseFront/PublicTable'
 
 const Home = () => (
   <div>
-    
+    <PublicTable></PublicTable>
   </div>
 )
 

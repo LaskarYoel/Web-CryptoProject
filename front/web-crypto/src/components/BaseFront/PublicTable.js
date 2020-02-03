@@ -6,8 +6,9 @@ import SearchIcon from '@material-ui/icons/Search';
 class PublicTable extends React.Component {
     render() {
       return (
-          
-        <MaterialTable
+        <div>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+           <MaterialTable
           title="All Crypto Currencies"
           columns={[
             { title: 'Name', field: 'name' },
@@ -37,6 +38,8 @@ class PublicTable extends React.Component {
             }
           ]}
         />
+        </div> 
+       
       )
     }
   }
