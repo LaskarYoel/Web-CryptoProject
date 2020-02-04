@@ -96,8 +96,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const user = {
-  connect: true,
-  admin: true,
+  connect: false,
+  admin: false,
 }
 
 
