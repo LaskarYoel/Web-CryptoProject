@@ -3,10 +3,12 @@ from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import jsonify, request
+from flask_cors import CORS
 from .api import users
 import requests, json
 from api import app
 
+CORS(app)
 key = "8bd59f7c5dc27e27f259e63e5201212f3442f7f1a9978ebd4302009570c3cc49"
 cryptos = "BTC,ETH,XRP,BCH,BSV,USDT,LTC,EOS,BNB,ADA,XTZ,ETC,XLM,XMR,TRX,DASH,LINK,MIOTA,LEO,NEO,HT,ATOM,CRO,HEDG,ZEC,MKR,ONT,USDC,XEM,VET,BAT,DOGE,ICX,PAX,FTT,QTUM,DCR,BTG,SNX,RVN,REP,ZRX,ALGO,LSK,TUSD,OMG,OKB,ZB,SXP,BCD"
 
