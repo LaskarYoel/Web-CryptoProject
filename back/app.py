@@ -43,14 +43,19 @@ def cryptos():
     data = json.loads(r.text)
     # 2) Clean the python object 
     # Pythonista style 
-    # clean_data = { money :  {_k: data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] }
+    # clean_data = [{_k: data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] ]   
+    clean_data = [{_k: money if _k == 'FROMSYMBOL' else data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] ]   
     # JS style
-    clean_data = {}
-    for money in data["DISPLAY"]:
-        clean_data[money] = {} 
-        for _k in intersting_keys:
-            clean_data[money][_k] = data["DISPLAY"][money]['EUR'][_k] 
-    # 3) python object to a json data
+    # clean_data = {}
+    # for money in data["DISPLAY"]:
+    #     clean_data[money] = {} 
+    #     print("_______________")
+    #     print(clean_data[money].keys())
+    #     print("_______________")
+    #     for _k in intersting_keys:
+    #         # clean_data = data["DISPLAY"][money]['EUR'][_k]
+    #         clean_data[money][_k] = data["DISPLAY"][money]['EUR'][_k] 
+    # # 3) python object to a json data
     response = dumps(clean_data)
     return response
 
