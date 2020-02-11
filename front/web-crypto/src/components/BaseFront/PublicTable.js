@@ -92,6 +92,7 @@ const LogoWithName = props => {
 };
 
 class PublicTable extends React.Component {
+  //première fonction lancé de la page 
   componentDidMount() {
     this.props.getCryptos();
   }
@@ -146,31 +147,31 @@ class PublicTable extends React.Component {
             { title: "CHANGEPCT24HOUR", field: "CHANGEPCT24HOUR" }
           ]}
           data={this.props.cryptos}
-          // parentChildData={(row, rows) => console.log(row.favorite)}
+          parentChildData={(row, rows) => console.log(row.favorite)}
 
-          // actions={[
-          //   rowData => ({
-          //     icon: () => this.IconToggle(rowData.tableData.id),
-          //     tooltip: "More details",
-          //     onClick: (event, rowData) => {
-          //       this.props.cryptos[rowData.tableData.id].favorite = !this.props
-          //         .cryptos[rowData.tableData.id].favorite;
-          //       this.setState({});
-          //       this.props.updateFavoris(this.props.cryptos);
+          actions={[
+            rowData => ({
+              icon: () => this.IconToggle(rowData.tableData.id),
+              tooltip: "More details",
+              onClick: (event, rowData) => {
+                this.props.cryptos[rowData.tableData.id].favorite = !this.props
+                  .cryptos[rowData.tableData.id].favorite;
+                this.setState({});
+                this.props.updateFavoris(this.props.cryptos);
 
-          //       //   data: this.state.data.map((data, i) => (
-          //       //     i === rowData.tableData.id
-          //       //     ?  { ...data, favorite : !data.favorite }
-          //       //     : data
-          //       //   ))
+                //   data: this.state.data.map((data, i) => (
+                //     i === rowData.tableData.id
+                //     ?  { ...data, favorite : !data.favorite }
+                //     : data
+                //   ))
 
-          //       // })
+                // })
 
-          //       // console.log(rowData.tableData)
-          //       // console.log(rowData.id)
-          //     }
-          //   })
-          // ]}
+                // console.log(rowData.tableData)
+                // console.log(rowData.id)
+              }
+            })
+          ]}
         />
       </>
     );

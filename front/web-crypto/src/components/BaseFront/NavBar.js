@@ -28,6 +28,8 @@ import Profil from '../UserPages/Profil';
 import ListUsers from '../AdminPages/listUsers';
 import ListCrypto from '../AdminPages/listCrypto';
 import Error404 from '../BaseApp/Error404';
+import Articles from './Articles';
+import Grid from './Grid';
 
 
 
@@ -96,7 +98,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const user = {
-  connect: false,
+  connect: true,
   admin: false,
 }
 
@@ -170,7 +172,13 @@ export default function Navbar(props) {
                 {icons.home}
               </ListItemIcon>
               <ListItemText > Home </ListItemText>
+            </ListItem>
+            <ListItem component={Link} to='/Article' button>
 
+              <ListItemIcon>
+                {icons.Article}
+              </ListItemIcon>
+              <ListItemText > Article </ListItemText>
             </ListItem>
 
             {user.connect ?
@@ -217,6 +225,9 @@ export default function Navbar(props) {
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path='/' component={Home} />
+            <Route exact path='/Grid' component={Grid} />
+
+            <Route exact path='/Article' component={Articles} />
             {
               user.connect ? 
                 <>

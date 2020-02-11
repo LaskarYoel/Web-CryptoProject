@@ -10,8 +10,7 @@ class RouterApp extends React.Component {
     
     return (
       <Router history={history}>
-        <Navbar/>
-        
+        <Navbar/>   
       </Router>
     )
   }
