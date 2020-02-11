@@ -158,6 +158,7 @@ class PublicTable extends React.Component {
                   .cryptos[rowData.tableData.id].favorite;
                 this.setState({});
                 this.props.updateFavoris(this.props.cryptos);
+                console.log(this.props.cryptos);
 
                 //   data: this.state.data.map((data, i) => (
                 //     i === rowData.tableData.id
