@@ -30,6 +30,7 @@ import ListCrypto from '../AdminPages/listCrypto';
 import Error404 from '../BaseApp/Error404';
 import Articles from './Articles';
 import Grid from './Grid';
+import AddUser from '../UserPages/AddUser';
 
 
 
@@ -250,7 +251,7 @@ export default function Navbar(props) {
                   <Route exact path='/list-users' component={Error404} />
                   <Route exact path='/list-crypto' component={Error404} />
                   <Route exact path='/login' component={Login} />
-                  <Route exact path='/register' component={Register} />
+                  <Route exact path='/register' component={AddUser} />
                 </>
             }
             
