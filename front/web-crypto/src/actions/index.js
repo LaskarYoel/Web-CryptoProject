@@ -1,5 +1,6 @@
 import { GET_CRYPTOS } from "./type";
 import { UPDATE_FAVORIS } from "./type";
+import { DELETE_CRYPTOS } from "./type";
 import { GET_FAVORIS} from "./type";
 import axios from "axios";
 // stock toutes les actions (fonctions)
@@ -17,6 +18,13 @@ export const updateFavoris = (table,id) => async dispatch => {
   //  state.cryptos[Id].favorite= !state.cryptos[Id].favorite
   axios.post(`https://jsonplaceholder.typicode.com/users/`+id,  table.fromsymbol )
   dispatch({ type: UPDATE_FAVORIS, payload: table });
+};
+
+export const deleteCryptos = (table,id) => async dispatch => {
+  // axios with id
+  //  state.cryptos[Id].favorite= !state.cryptos[Id].favorite
+  axios.post(`https://jsonplaceholder.typicode.com/cryptos/`,  table.fromsymbol )
+  dispatch({ type: DELETE_CRYPTOS, payload: table });
 };
 
 export const getFavoris = id => async dispatch => {

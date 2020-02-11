@@ -1,12 +1,11 @@
 //gestions des actions Cryptos
-import { GET_CRYPTOS ,DELETE_CRYPTOS } from "../actions/type"
-import {UPDATE_FAVORIS} from "../actions/type"
+import { GET_CRYPTOS, UPDATE_CRYPTOS } from "../actions/type"
 
 export default (state= [], action={}) =>{
     switch (action.type){
         case GET_CRYPTOS:
             return action.payload
-        case DELETE_CRYPTOS:
+        case UPDATE_CRYPTOS:
             return action.payload
             
         //     [
