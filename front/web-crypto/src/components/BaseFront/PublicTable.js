@@ -105,7 +105,6 @@ class PublicTable extends React.Component {
   };
   IconToggle = row => {
     // console.log(favorite)
-    console.log(this.props.cryptos[row].favorite);
     return this.props.cryptos[row].favorite == 1 ? (
       <StarIcon />
     ) : (
@@ -147,7 +146,6 @@ class PublicTable extends React.Component {
             { title: "CHANGEPCT24HOUR", field: "CHANGEPCT24HOUR" }
           ]}
           data={this.props.cryptos}
-          parentChildData={(row, rows) => console.log(row.favorite)}
 
           actions={[
             rowData => ({
@@ -157,8 +155,8 @@ class PublicTable extends React.Component {
                 this.props.cryptos[rowData.tableData.id].favorite = !this.props
                   .cryptos[rowData.tableData.id].favorite;
                 this.setState({});
-                this.props.updateFavoris(this.props.cryptos);
-                console.log(this.props.cryptos);
+                this.props.updateFavoris(rowData, this.props
+                  .cryptos[rowData.tableData.id].favorite, "id");
 
                 //   data: this.state.data.map((data, i) => (
                 //     i === rowData.tableData.id

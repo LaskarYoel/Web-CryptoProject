@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
 
 const user = {
   connect: true,
-  admin: false,
+  admin: true,
 }
 
 
