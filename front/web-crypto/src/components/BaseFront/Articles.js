@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles({
@@ -50,7 +51,14 @@ export default function MediaCard() {
 
   const renderList = () => {
     if (!data) {
-      return 'loading'
+      return (
+        <div className={classes.root} style={{
+          marginLeft:45+'%',
+          marginTop:25+'%',
+        }}>
+      <CircularProgress />
+    </div>
+      )
     } else {
       return ( <Grid container spacing={2}>
 {data.map(item => {
