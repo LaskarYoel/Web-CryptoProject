@@ -46,20 +46,8 @@ def cryptos():
     data = json.loads(r.text)
     # 2) Clean the python object
     # Pythonista style
-    # clean_data = [{_k: data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] ]
     clean_data = [{_k: money if _k == 'FROMSYMBOL' else data["DISPLAY"][money]
                    ['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"]]
-    # JS style
-    # clean_data = {}
-    # for money in data["DISPLAY"]:
-    #     clean_data[money] = {}
-    #     print("_______________")
-    #     print(clean_data[money].keys())
-    #     print("_______________")
-    #     for _k in intersting_keys:
-    #         # clean_data = data["DISPLAY"][money]['EUR'][_k]
-    #         clean_data[money][_k] = data["DISPLAY"][money]['EUR'][_k]
-    # # 3) python object to a json data
     response = dumps(clean_data)
     return response
 
@@ -70,24 +58,12 @@ def handle_favorite(id):
     return users.add_fav(id, _json)
 
 
-# Provide a method to create access tokens. The create_access_token()
-# function is used to actually generate the token, and you can return
-# it to the caller however you choose.
-# @app.route('/login', methods=['POST'])
-# def login():
-#     if not request.is_json:
-#         return jsonify({"msg": "Missing JSON in request"}), 400
+@app.route('/favorite/<id>', methods=['GET'])
+def get_favorite(id):
+    return users.get_fav(id)
 
-#     username = request.json.get('username', None)
-#     password = request.json.get('password', None)
-#     if not username:
-#         return jsonify({"msg": "Missing username parameter"}), 400
-#     if not password:
-#         return jsonify({"msg": "Missing password parameter"}), 400
 
-#     if username != 'test' or password != 'test':
-#         return jsonify({"msg": "Bad username or password"}), 401
-
-#     # Identity can be any data that is json serializable
-#     access_token = create_access_token(identity=username)
-#     return jsonify(access_token=access_token), 200
+@app.route('/login', methods=['POST'])
+def connexion():
+    _json = request.json
+    return users.login(_json)

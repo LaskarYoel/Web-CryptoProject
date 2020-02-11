@@ -13,86 +13,13 @@ import {
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { connect } from "react-redux";
-import { getCryptos } from "../../actions";
-import { updateFavoris } from "../../actions";
-import { UPDATE_FAVORIS } from "../../actions/type";
+import { getCryptos, updateFavoris } from "../../actions";
+import { LogoWithName } from "./LogoWithName";
 
-const CryptoName = {
-  BTC: "Bitcoin",
-  ETH: "Ethereum",
-  XRP: "XRP",
-  BCH: "Bitcoin Cash",
-  BSV: "Bitcoin SV",
-  USDT: "Tether",
-  LTC: "Litecoin",
-  EOS: "EOS",
-  BNB: "Binance Coin",
-  ADA: "Cardano",
-  XTZ: "Tezos",
-  ETC: "Ethereum Classic",
-  XLM: "Stellar Lumens",
-  XMR: "Monero",
-  TRX: "TRON",
-  DASH: "Dash",
-  LINK: "Chainlink",
-  MIOTA: "IOTA",
-  LEO: "UNUS SED LEO",
-  NEO: "Neo",
-  HT: "Huobi Token",
-  ATOM: "Cosmos",
-  CRO: "Crypto.com Coin",
-  HEDG: "HedgeTrade",
-  ZEC: "Zcash",
-  MKR: "Maker",
-  ONT: "Ontology",
-  USDC: "USD Coin",
-  XEM: "NEM",
-  VET: "VeChain",
-  BAT: "Basic Attention Token",
-  DOGE: "Dogecoin",
-  ICX: "ICON",
-  PAX: "Paxos Standard",
-  FTT: "FTX Token",
-  QTUM: "Qtum",
-  DCR: "Decred",
-  BTG: "Bitcoin Gold",
-  SNX: "Synthetix Network Token",
-  RVN: "Ravencoin",
-  REP: "Augur",
-  ZRX: "Oz",
-  ALGO: "Algorand",
-  LSK: "Lisk",
-  TUSD: "TrueUSD",
-  OMG: "OmiseGO",
-  OKB: "#0667D0",
-  ZB: "ZB Token",
-  SXP: "Swipe",
-  BCD: "Bitcoin Diamond"
-};
-
-const LogoWithName = props => {
-  //www.cryptocompare.com/media/19633/btc.png?width=200
-  // <br />;
-  // {
-  //   CryptoName[props.name];
-  // }
-  // https:
-  return (
-    <ListItem style={{ padding: 0 }}>
-      <ListItemAvatar>
-        <img
-          src={`https://www.cryptocompare.com${props.url}?width=40`}
-          alt="Img"
-          style={{ verticalAlign: "bottom" }}
-        />
-      </ListItemAvatar>
-      <ListItemText primary={props.name} secondary={CryptoName[props.name]} />
-    </ListItem>
-  );
-};
+const user = JSON.parse(localStorage.getItem("user"));
 
 class PublicTable extends React.Component {
-  //première fonction lancé de la page 
+  //première fonction lancé de la page
   componentDidMount() {
     this.props.getCryptos();
   }
@@ -146,7 +73,6 @@ class PublicTable extends React.Component {
             { title: "CHANGEPCT24HOUR", field: "CHANGEPCT24HOUR" }
           ]}
           data={this.props.cryptos}
-
           actions={[
             rowData => ({
               icon: () => this.IconToggle(rowData.tableData.id),
@@ -155,8 +81,11 @@ class PublicTable extends React.Component {
                 this.props.cryptos[rowData.tableData.id].favorite = !this.props
                   .cryptos[rowData.tableData.id].favorite;
                 this.setState({});
-                this.props.updateFavoris(rowData, this.props
-                  .cryptos[rowData.tableData.id].favorite, "id");
+                this.props.updateFavoris(
+                  rowData,
+                  this.props.cryptos[rowData.tableData.id].favorite,
+                  user._id.$oid
+                );
 
                 //   data: this.state.data.map((data, i) => (
                 //     i === rowData.tableData.id

@@ -1,98 +1,92 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom'
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-
-
-
-
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import history from "../BaseApp/history";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://www.epitech.eu/fr/">
         Epitech
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
+    height: "100vh"
   },
   image: {
-    backgroundImage: 'url(/images/logoEpitechParis.jpg)',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: "url(/images/logoEpitechParis.jpg)",
+    backgroundRepeat: "no-repeat",
     backgroundColor:
-      theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
-    backgroundSize: '52%', 
-    backgroundPosition: 'center',
+      theme.palette.type === "dark"
+        ? theme.palette.grey[900]
+        : theme.palette.grey[50],
+    backgroundSize: "52%",
+    backgroundPosition: "center"
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
-
-
 export default function SignInSide() {
-
   const handleChange = event => {
     this.setState({ name: event.target.value });
-  }
+  };
 
-  const [email, setEmail] = React.useState(null)
-  const [pwd, setPwd] = React.useState(null)
+  const [email, setEmail] = React.useState(null);
+  const [pwd, setPwd] = React.useState(null);
 
-
-  
   const onConnexion = () => {
-  
-    
+    if (!email) console.log("pas d'email");
+    if (!pwd) console.log("pas d'pwd");
 
-    if(!email) console.log("pas d'email")
-    if(!pwd) console.log("pas d'pwd")
+    if (pwd && email) {
+      const data = { email: email, pwd: pwd };
 
-    if(pwd && email){
-      const data = {email: email, pwd: pwd}
-
-      axios.post(`http://127.0.0.1:5000/user`, data)
-      .then(res => {
-          console.log(res);
-          console.log(res.data);
-      })
-    } 
-    
-  }
+      axios.post(`http://127.0.0.1:5000/login`, data).then(res => {
+        if (res.status === 200) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          const user = JSON.parse(localStorage.getItem("user"));
+          history.push("/");
+        } else {
+          alert("Mot de passe ou Email erronés");
+        }
+      });
+    }
+  };
 
   const classes = useStyles();
 
@@ -115,21 +109,20 @@ export default function SignInSide() {
               fullWidth
               label="Email Address"
               autoFocus
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               value={email}
             />
             <TextField
-              style={{marginTop: 15 + 'px'}}
+              style={{ marginTop: 15 + "px" }}
               variant="outlined"
               required
               fullWidth
               label="Password"
-              onChange={(e)=>setPwd(e.target.value)}
+              onChange={e => setPwd(e.target.value)}
               value={pwd}
             />
 
             <Button
-            
               fullWidth
               variant="contained"
               color="primary"
