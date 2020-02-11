@@ -13,11 +13,24 @@ export const getCryptos = () => async dispatch => {
   dispatch({ type: GET_CRYPTOS, payload: response.data });
 };
 
-export const updateFavoris = (table,id) => async dispatch => {
+export const updateFavoris = (crypto,add,id) => async dispatch => {
   // axios with id
   //  state.cryptos[Id].favorite= !state.cryptos[Id].favorite
-  axios.post(`https://jsonplaceholder.typicode.com/users/`+id,  table.fromsymbol )
-  dispatch({ type: UPDATE_FAVORIS, payload: table });
+
+  console.log(crypto.FROMSYMBOL)
+  console.log(add)
+
+  const fav = {favorite: crypto.FROMSYMBOL, add: add  }
+  // console.log({favorite: crypto.FROMSYMBOL, add: add  })
+
+  // axios.post(`https://jsonplaceholder.typicode.com/users/`+id,  table.fromsymbol )
+  axios.post(`https://jsonplaceholder.typicode.com/users`, { fav })
+  .then(res => {
+    console.log(res);
+    console.log(res.data);
+  })
+
+  dispatch({ type: UPDATE_FAVORIS, payload: crypto });
 };
 
 export const deleteCryptos = (table,id) => async dispatch => {

@@ -5,7 +5,8 @@ from bson.objectid import ObjectId
 from flask import jsonify, request
 from flask_cors import CORS
 from .api import users
-import requests, json
+import requests
+import json
 from api import app
 
 CORS(app)
@@ -16,7 +17,7 @@ cryptos = "BTC,ETH,XRP,BCH,BSV,USDT,LTC,EOS,BNB,ADA,XTZ,ETC,XLM,XMR,TRX,DASH,LIN
 @app.route('/users', methods=['GET'])
 def get_users():
     return users.get_all()
-	
+
 
 @app.route('/user', methods=['POST'])
 def add_user():
@@ -33,33 +34,40 @@ def handle_user(id):
         return users.update_by_id(id, _json)
     else:
         return users.delete_by_id(id)
-	
+
 
 @app.route('/cryptos', methods=['GET'])
 def cryptos():
-    r = requests.get('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,BCH,BSV,USDT,LTC,EOS,BNB,ADA,XTZ,ETC,XLM,XMR,TRX,DASH,LINK,MIOTA,LEO,NEO,HT,ATOM,CRO,HEDG,ZEC,MKR,ONT,USDC,XEM,VET,BAT,DOGE,ICX,PAX,FTT,QTUM,DCR,BTG,SNX,RVN,REP,ZRX,ALGO,LSK,TUSD,OMG,OKB,ZB,SXP,BCD&tsyms=EUR&api_key={key}')
-    intersting_keys = ["FROMSYMBOL", "PRICE", "IMAGEURL", "LASTUPDATE", "VOLUMEDAYTO", "MKTCAP", "CHANGEPCT24HOUR"]
+    r = requests.get(
+        'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,BCH,BSV,USDT,LTC,EOS,BNB,ADA,XTZ,ETC,XLM,XMR,TRX,DASH,LINK,MIOTA,LEO,NEO,HT,ATOM,CRO,HEDG,ZEC,MKR,ONT,USDC,XEM,VET,BAT,DOGE,ICX,PAX,FTT,QTUM,DCR,BTG,SNX,RVN,REP,ZRX,ALGO,LSK,TUSD,OMG,OKB,ZB,SXP,BCD&tsyms=EUR&api_key={key}')
+    intersting_keys = ["FROMSYMBOL", "PRICE", "IMAGEURL",
+                       "LASTUPDATE", "VOLUMEDAYTO", "MKTCAP", "CHANGEPCT24HOUR"]
     # 1) Transform a json -> a python object
     data = json.loads(r.text)
-    # 2) Clean the python object 
-    # Pythonista style 
-    # clean_data = [{_k: data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] ]   
-    clean_data = [{_k: money if _k == 'FROMSYMBOL' else data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] ]   
+    # 2) Clean the python object
+    # Pythonista style
+    # clean_data = [{_k: data["DISPLAY"][money]['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"] ]
+    clean_data = [{_k: money if _k == 'FROMSYMBOL' else data["DISPLAY"][money]
+                   ['EUR'][_k] for _k in intersting_keys} for money in data["DISPLAY"]]
     # JS style
     # clean_data = {}
     # for money in data["DISPLAY"]:
-    #     clean_data[money] = {} 
+    #     clean_data[money] = {}
     #     print("_______________")
     #     print(clean_data[money].keys())
     #     print("_______________")
     #     for _k in intersting_keys:
     #         # clean_data = data["DISPLAY"][money]['EUR'][_k]
-    #         clean_data[money][_k] = data["DISPLAY"][money]['EUR'][_k] 
+    #         clean_data[money][_k] = data["DISPLAY"][money]['EUR'][_k]
     # # 3) python object to a json data
     response = dumps(clean_data)
     return response
 
 
+@app.route('/favorite/<id>', methods=['PUT'])
+def handle_favorite(id):
+    _json = request.json
+    return users.add_fav(id, _json)
 
 
 # Provide a method to create access tokens. The create_access_token()
